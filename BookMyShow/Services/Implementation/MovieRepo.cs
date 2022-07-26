@@ -32,7 +32,7 @@ namespace BookMyShow.Services.Implementation
         {
             Movie moviemodel = _mapper.Map<Movie>(movieViewModel);
 
-            _appmovieContext.Movie.Add(moviemodel);
+            _appmovieContext.Movies.Add(moviemodel);
             _appmovieContext.SaveChanges();
 
             return "save successfully";
@@ -51,7 +51,7 @@ namespace BookMyShow.Services.Implementation
             //};
             //return commands;
 
-            var movies = _appmovieContext.Movie.ToList();
+            var movies = _appmovieContext.Movies.ToList();
             var listofMovieViewmodel = _mapper.Map<IEnumerable<MovieViewModel>>(movies);
 
             return listofMovieViewmodel;
@@ -75,7 +75,7 @@ namespace BookMyShow.Services.Implementation
 
         public MovieViewModel GetMovieById(int id)
         {
-            var movies = _appmovieContext.Movie.ToList();
+            var movies = _appmovieContext.Movies.ToList();
             var movie = movies.Where(mov => mov.MovieId == id).FirstOrDefault();
             var moviebyid= _mapper.Map<MovieViewModel>(movie);
             return moviebyid;
