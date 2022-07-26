@@ -31,7 +31,7 @@ namespace BookMyShow.Controllers
 
         }
         
-        //Get api/GetAllMovies
+        
 
         [HttpGet]
         public IEnumerable<MovieViewModel> GetAllMovies()
@@ -40,6 +40,21 @@ namespace BookMyShow.Controllers
             return movies;
 
         }
+
+        [HttpPost("{id}")]
+        public MovieViewModel GetMovieById(int id)
+        {
+            var movie = _movieservice.GetMovieById(id);
+            return movie;
+        }
+        [HttpPost("{language}/GetMovieByLanguage")]
+        public IEnumerable<MovieViewModel> GetMovieByLanguage(string language)
+        {
+            var movie = _movieservice.GetMovieByLanguage(language);
+            return movie;
+        }
+
+
     }
 }
 

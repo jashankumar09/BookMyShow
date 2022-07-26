@@ -58,20 +58,20 @@ namespace BookMyShow.Services.Implementation
 
         }
 
-        public MovieViewModel GetMovieByActor(string actor)
-        {
-            throw new NotImplementedException();
-        }
+        //public MovieViewModel GetMovieByActor(string actor)
+        //{
+        //    throw new NotImplementedException();
+        //}
 
-        public MovieViewModel GetMovieByDirector(string director)
-        {
-            throw new NotImplementedException();
-        }
+        //public MovieViewModel GetMovieByDirector(string director)
+        //{
+        //    throw new NotImplementedException();
+        //}
 
-        public MovieViewModel GetMovieByGenre(string genre)
-        {
-            throw new NotImplementedException();
-        }
+        //public MovieViewModel GetMovieByGenre(string genre)
+        //{
+        //    throw new NotImplementedException();
+        //}
 
         public MovieViewModel GetMovieById(int id)
         {
@@ -81,16 +81,27 @@ namespace BookMyShow.Services.Implementation
             return moviebyid;
 
         }
-        
 
-        public MovieViewModel GetMovieByLanguage(string language)
+
+        public IEnumerable<MovieViewModel> GetMovieByLanguage(string language)
         {
-            throw new NotImplementedException();
+            var movies = _appmovieContext.Movies.ToList();
+            var Listmovie = movies.Where(mov => mov.MovieLanguage == language);
+            var moviesbylanguage = _mapper.Map<IEnumerable<MovieViewModel>>(Listmovie);
+
+            return moviesbylanguage;
+
+
+
+
+       
+            
+
         }
 
-        public MovieViewModel GetMovieByTitle(string title)
-        {
-            throw new NotImplementedException();
-        }
+        //public MovieViewModel GetMovieByTitle(string title)
+        //{
+        //    throw new NotImplementedException();
+        //}
     }
 }
