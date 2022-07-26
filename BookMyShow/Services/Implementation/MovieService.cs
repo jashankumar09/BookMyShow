@@ -10,14 +10,14 @@ using System.Threading.Tasks;
 
 namespace BookMyShow.Services.Implementation
 {
-    public class MovieRepo : IMovieRepo
+    public class MovieService : IMovieService
 
     {
         private readonly MovieContext _appmovieContext;
         private readonly IMapper _mapper;
 
 
-        public MovieRepo(MovieContext appmovieContext,IMapper mapper)
+        public MovieService(MovieContext appmovieContext,IMapper mapper)
         {
             this._appmovieContext = appmovieContext;
             this._mapper = mapper;

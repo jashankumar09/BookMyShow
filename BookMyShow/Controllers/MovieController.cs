@@ -15,27 +15,28 @@ namespace BookMyShow.Controllers
     public class MovieController : ControllerBase
     {
 
-        private readonly IMovieRepo _repository;
+        private readonly IMovieService _movieservice;
 
 
-        public MovieController(IMovieRepo repository)
+        public MovieController(IMovieService movieservice)
         {
-            _repository = repository;
+            _movieservice = movieservice;
         }
-
         [HttpPost]
         public string AddMovie(MovieViewModel movieviewmodel)
         {
 
-            string msg = _repository.AddMovies(movieviewmodel);
+            string msg = _movieservice.AddMovies(movieviewmodel);
             return msg;
 
         }
+        
+        //Get api/GetAllMovies
 
         [HttpGet]
         public IEnumerable<MovieViewModel> GetAllMovies()
         {
-            var movies = _repository.GetAllMovies();
+            var movies = _movieservice.GetAllMovies();
             return movies;
 
         }

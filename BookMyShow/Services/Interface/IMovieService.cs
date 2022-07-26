@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BookMyShow.Services.Interface
 {
-    public interface IMovieRepo
+    public interface IMovieService
     {
 
        String AddMovie(MovieViewModel movieviewmodel);

@@ -35,7 +35,7 @@ namespace BookMyShow
             services.AddDbContext<MovieContext>(opt => opt.UseSqlServer(Configuration.GetConnectionString("MovieConnection")));
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
-            services.AddScoped<IMovieRepo,MovieRepo>();
+            services.AddScoped<IMovieService,MovieService>();
             //services.AddScoped<ICommaderRepo,MockCommanderRepo>();
 
             services.AddSwaggerGen();
