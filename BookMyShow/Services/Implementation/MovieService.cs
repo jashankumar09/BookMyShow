@@ -24,12 +24,9 @@ namespace BookMyShow.Services.Implementation
             this._mapper = mapper;
 
         }
-        public string AddMovie(MovieViewModel movieviewmodel)
-        {
-            throw new NotImplementedException();
-        }
+     
 
-        public string AddMovies(MovieViewModel movieViewModel)
+        public string AddMovie(MovieViewModel movieViewModel)
         {
             Movie moviemodel = _mapper.Map<Movie>(movieViewModel);
 

@@ -10,7 +10,7 @@ namespace BookMyShow.Services.Interface
     public interface IMovieService
     {
 
-       String AddMovie(MovieViewModel movieviewmodel);
+       //string AddMovie(MovieViewModel movieviewmodel);
        IEnumerable<MovieViewModel> GetAllMovies();
 
         MovieViewModel GetMovieById(int id);
@@ -25,7 +25,7 @@ namespace BookMyShow.Services.Interface
         IEnumerable<MovieViewModel> GetMovieByLanguage(string language);
 
         //MovieViewModel GetMovieByGenre(string genre);
-        string AddMovies(MovieViewModel movieViewModel);
+        string AddMovie(MovieViewModel movieViewModel);
 
         IEnumerable<MovieViewModel> GetMovieByDirector(string director);
 

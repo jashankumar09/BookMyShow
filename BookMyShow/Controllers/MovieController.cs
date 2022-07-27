@@ -26,7 +26,7 @@ namespace BookMyShow.Controllers
         public string AddMovie(MovieViewModel movieviewmodel)
         {
 
-            string msg = _movieservice.AddMovies(movieviewmodel);
+            string msg = _movieservice.AddMovie(movieviewmodel);
             return msg;
 
         }
