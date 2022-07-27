@@ -22,18 +22,18 @@ namespace BookMyShow.Controllers
         {
             _movieservice = movieservice;
         }
-        [HttpPost]
-        public string AddMovie(MovieViewModel movieviewmodel)
+        [HttpPost("/AddMovie")]
+        public async Task<string> AddMovieAsync(MovieViewModel movieviewmodel)
         {
 
-            string msg = _movieservice.AddMovie(movieviewmodel);
+            string msg =await _movieservice.AddMovieAsync(movieviewmodel);
             return msg;
 
         }
         
         
 
-        [HttpGet]
+        [HttpGet("/GetAllMovies")]
         public IEnumerable<MovieViewModel> GetAllMovies()
         {
             var movies = _movieservice.GetAllMovies();

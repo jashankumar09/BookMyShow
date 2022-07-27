@@ -25,7 +25,7 @@ namespace BookMyShow.Services.Interface
         IEnumerable<MovieViewModel> GetMovieByLanguage(string language);
 
         //MovieViewModel GetMovieByGenre(string genre);
-        string AddMovie(MovieViewModel movieViewModel);
+        Task<string> AddMovieAsync(MovieViewModel movieViewModel);
 
         IEnumerable<MovieViewModel> GetMovieByDirector(string director);
 

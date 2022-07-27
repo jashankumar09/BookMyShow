@@ -26,13 +26,12 @@ namespace BookMyShow.Services.Implementation
         }
      
 
-        public string AddMovie(MovieViewModel movieViewModel)
+        public async Task<string> AddMovieAsync(MovieViewModel movieViewModel)
         {
             Movie moviemodel = _mapper.Map<Movie>(movieViewModel);
 
             _appmovieContext.Movies.Add(moviemodel);
-            _appmovieContext.SaveChangesAsync();
-
+            await _appmovieContext.SaveChangesAsync();
             return "save successfully";
 
         }
@@ -51,9 +50,7 @@ namespace BookMyShow.Services.Implementation
 
             var movies = _appmovieContext.Movies.ToList();
             var listofMovieViewmodel = _mapper.Map<IEnumerable<MovieViewModel>>(movies);
-
             return listofMovieViewmodel;
-
         }
 
         //public MovieViewModel GetMovieByActor(string actor)
