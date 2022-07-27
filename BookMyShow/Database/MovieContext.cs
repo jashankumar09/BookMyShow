@@ -17,5 +17,7 @@ namespace BookMyShow.Database
         public DbSet<MovieBooking> MovieBookings { get; set; }
         public DbSet<Seat> Seats { get; set; }
         public DbSet<Theatre> Theatres { get; set; }
+        public DbSet<Actor> Actors { get; set; }
+
     }
 }

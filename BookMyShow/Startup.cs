@@ -36,6 +36,9 @@ namespace BookMyShow
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
             services.AddScoped<IMovieService,MovieService>();
+
+            services.AddScoped<IActorService,ActorService>();
+
             //services.AddScoped<ICommaderRepo,MockCommanderRepo>();
 
             services.AddSwaggerGen();

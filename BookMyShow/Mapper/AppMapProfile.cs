@@ -13,6 +13,8 @@ namespace BookMyShow.Mapper
         public AppMapProfile()
         {
         CreateMap<MovieViewModel,Movie>().ReverseMap();
+        CreateMap<ActorViewModel,Actor>().ReverseMap();
+
 
         }
 
