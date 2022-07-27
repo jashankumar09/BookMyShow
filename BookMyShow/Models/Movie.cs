@@ -11,7 +11,7 @@ namespace BookMyShow.Models
 
         [Key]
         [Required]
-        public int MovieId { get; set; }
+        public long Id { get; set; }
 
         [Required]
         public string MovieTitle { get; set; }

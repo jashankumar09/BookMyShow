@@ -1,4 +1,5 @@
-﻿using BookMyShow.ViewModels;
+﻿using BookMyShow.Models;
+using BookMyShow.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,6 +26,24 @@ namespace BookMyShow.Services.Interface
 
         //MovieViewModel GetMovieByGenre(string genre);
         string AddMovies(MovieViewModel movieViewModel);
+
+        IEnumerable<MovieViewModel> GetMovieByDirector(string director);
+
+        IEnumerable<MovieViewModel> GetMovieByGenre(string genre);
+
+
+        Task<string> DeleteMovieAsync(int id);
+
+
+        Task <string> UpdateMovieAsync(int id,MovieViewModel movie);
+
+
+
+
+
+
+
+
     }
 
 }

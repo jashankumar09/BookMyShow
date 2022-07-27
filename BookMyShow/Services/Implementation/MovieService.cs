@@ -12,12 +12,13 @@ namespace BookMyShow.Services.Implementation
 {
     public class MovieService : IMovieService
 
+
     {
         private readonly MovieContext _appmovieContext;
         private readonly IMapper _mapper;
 
 
-        public MovieService(MovieContext appmovieContext,IMapper mapper)
+        public MovieService(MovieContext appmovieContext, IMapper mapper)
         {
             this._appmovieContext = appmovieContext;
             this._mapper = mapper;
@@ -33,7 +34,7 @@ namespace BookMyShow.Services.Implementation
             Movie moviemodel = _mapper.Map<Movie>(movieViewModel);
 
             _appmovieContext.Movies.Add(moviemodel);
-            _appmovieContext.SaveChanges();
+            _appmovieContext.SaveChangesAsync();
 
             return "save successfully";
 
@@ -76,8 +77,8 @@ namespace BookMyShow.Services.Implementation
         public MovieViewModel GetMovieById(int id)
         {
             var movies = _appmovieContext.Movies.ToList();
-            var movie = movies.Where(mov => mov.MovieId == id).FirstOrDefault();
-            var moviebyid= _mapper.Map<MovieViewModel>(movie);
+            var movie = movies.Where(mov => mov.Id == id).FirstOrDefault();
+            var moviebyid = _mapper.Map<MovieViewModel>(movie);
             return moviebyid;
 
         }
@@ -91,17 +92,70 @@ namespace BookMyShow.Services.Implementation
 
             return moviesbylanguage;
 
+        }
+
+        
 
 
+        public async Task<string> DeleteMovieAsync(int id)
+        {
+            var movies = _appmovieContext.Movies;
+            var movie = movies.Where(mov => mov.Id == id).FirstOrDefault();
 
-       
-            
+            if (movie == null)
+            {
+                return $"no movie found for this id {id}";
+            }
+            _appmovieContext.Remove(movie);
+
+            await _appmovieContext.SaveChangesAsync();
+
+            return "Delete Successfully";
 
         }
 
-        //public MovieViewModel GetMovieByTitle(string title)
-        //{
-        //    throw new NotImplementedException();
-        //}
+
+        public async Task<string> UpdateMovieAsync(int id,MovieViewModel movie)
+        {
+            var movieexists=_appmovieContext.Movies.Where(mov => mov.Id == id).FirstOrDefault();
+
+            if (movieexists == null) 
+            {
+                return $"no movie exists with this id {id}";
+            }
+
+            //var editmovie = _mapper.Map<Movie>(movie);
+            //editmovie.Id = id;
+            movieexists.MovieActor = movie.MovieActor;
+            movieexists.MovieDirector = movie.MovieDirector;
+            movieexists.MovieGenre = movie.MovieGenre;
+            movieexists.MovieLanguage = movie.MovieLanguage;
+            movieexists.MovieTitle = movie.MovieTitle;
+
+            _appmovieContext.Movies.Update(movieexists);
+            await _appmovieContext.SaveChangesAsync();
+
+            return "Update Successfully";
+        }
+
+        public IEnumerable<MovieViewModel> GetMovieByDirector(string director)
+        {
+            var movies = _appmovieContext.Movies.ToList();
+            var Listmovie = movies.Where(mov => mov.MovieDirector == director);
+            var moviesbydirector = _mapper.Map<IEnumerable<MovieViewModel>>(Listmovie);
+
+            return moviesbydirector;
+
+        }
+
+        public IEnumerable<MovieViewModel> GetMovieByGenre(string genre)
+        {
+            var movies = _appmovieContext.Movies.ToList();
+            var Listmovie = movies.Where(mov => mov.MovieDirector == genre);
+            var moviesbygenre = _mapper.Map<IEnumerable<MovieViewModel>>(Listmovie);
+
+            return moviesbygenre;
+        }
     }
+
 }

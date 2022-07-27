@@ -54,6 +54,44 @@ namespace BookMyShow.Controllers
             return movie;
         }
 
+        [HttpPost("{director}/GetMovieByDirector")]
+        public IEnumerable<MovieViewModel> GetMovieByDirector(string director)
+        {
+            var movie = _movieservice.GetMovieByDirector(director);
+            return movie;
+        }
+
+        [HttpPost("{genre}/GetMovieByGenre")]
+        public IEnumerable<MovieViewModel> GetMovieByGenre(string genre)
+        {
+            var movie = _movieservice.GetMovieByGenre(genre);
+            return movie;
+        }
+
+
+
+
+
+
+
+
+
+        [HttpDelete("{id}/DeleteMovie")]
+        public async Task<string> DeleteMovie(int id)
+        {
+            var deletemovie=await _movieservice.DeleteMovieAsync(id);
+            return deletemovie;
+
+        }
+
+
+        [HttpPut("{id}/UpdateMovie")]
+        public async Task<string>UpdateMovie(int id,MovieViewModel movie)
+        {
+            var updatemovie = await _movieservice.UpdateMovieAsync(id,movie);
+            return updatemovie;
+        }
+
 
     }
 }
