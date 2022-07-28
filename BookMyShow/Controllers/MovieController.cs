@@ -42,7 +42,7 @@ namespace BookMyShow.Controllers
         }
 
         [HttpPost("{id}")]
-        public MovieViewModel GetMovieById(int id)
+        public MovieViewModel GetMovieByIdAsync(int id)
         {
             var movie = _movieservice.GetMovieById(id);
             return movie;
@@ -92,6 +92,8 @@ namespace BookMyShow.Controllers
             return updatemovie;
         }
 
+
+       
 
     }
 }

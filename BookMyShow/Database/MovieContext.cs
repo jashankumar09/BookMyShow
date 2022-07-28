@@ -13,11 +13,21 @@ namespace BookMyShow.Database
         {
 
         }
+
+        protected override void OnModelCreating(ModelBuilder modelbuilder)
+        {
+            modelbuilder.Entity<Movie_Actor>().HasOne(m => m.Movie).WithMany(ma => ma.Movie_Actor).HasForeignKey(mi =>mi.MovieId);
+
+            modelbuilder.Entity<Movie_Actor>().HasOne(a => a.Actor).WithMany(ma => ma.Movie_Actor).HasForeignKey(mi =>mi.ActorId);
+
+        }
         public DbSet<Movie> Movies { get; set; }
         public DbSet<MovieBooking> MovieBookings { get; set; }
         public DbSet<Seat> Seats { get; set; }
         public DbSet<Theatre> Theatres { get; set; }
         public DbSet<Actor> Actors { get; set; }
+
+        public DbSet<Movie_Actor>Movie_Actor { get; set; }
 
     }
 }

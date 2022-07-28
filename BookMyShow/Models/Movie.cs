@@ -29,5 +29,7 @@ namespace BookMyShow.Models
 
         [Required]
         public string MovieGenre { get; set; }
+
+        public List<Movie_Actor> Movie_Actor { get; set; }
     }
 }
