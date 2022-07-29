@@ -38,35 +38,14 @@ namespace BookMyShow.Services.Implementation
 
         public IEnumerable<MovieViewModel> GetAllMovies()
         {
-            //var commands = new List<MovieViewModel>
-            //{
-            //    new MovieViewModel { MovieTitle = "Boil corn", MovieActor = "Boil Water", MovieDirector = "kettle &Pan",MovieLanguage="English",MovieGenre="Comedy" },
-            //    new MovieViewModel { MovieTitle = "Boil corn", MovieActor = "Boil Water", MovieDirector = "kettle &Pan",MovieLanguage="English",MovieGenre="Comedy" },
-            //    new MovieViewModel {MovieTitle = "Boil corn", MovieActor = "Boil Water", MovieDirector = "kettle &Pan",MovieLanguage="English",MovieGenre="Comedy"}
-
-
-            //};
-            //return commands;
+            
 
             var movies = _appmovieContext.Movies.ToList();
             var listofMovieViewmodel = _mapper.Map<IEnumerable<MovieViewModel>>(movies);
             return listofMovieViewmodel;
         }
 
-        //public MovieViewModel GetMovieByActor(string actor)
-        //{
-        //    throw new NotImplementedException();
-        //}
 
-        //public MovieViewModel GetMovieByDirector(string director)
-        //{
-        //    throw new NotImplementedException();
-        //}
-
-        //public MovieViewModel GetMovieByGenre(string genre)
-        //{
-        //    throw new NotImplementedException();
-        //}
 
         public MovieViewModel GetMovieById(int id)
         {
@@ -118,8 +97,6 @@ namespace BookMyShow.Services.Implementation
                 return $"no movie exists with this id {id}";
             }
 
-            //var editmovie = _mapper.Map<Movie>(movie);
-            //editmovie.Id = id;
             movieexists.MovieActor = movie.MovieActor;
             movieexists.MovieDirector = movie.MovieDirector;
             movieexists.MovieGenre = movie.MovieGenre;

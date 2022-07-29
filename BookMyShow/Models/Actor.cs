@@ -19,5 +19,6 @@ namespace BookMyShow.Models
         public int Age { get; set; }
 
         public List<Movie_Actor> Movie_Actor { get; set; }
+
     }
 }

@@ -10,21 +10,15 @@ namespace BookMyShow.Services.Interface
     public interface IMovieService
     {
 
-       //string AddMovie(MovieViewModel movieviewmodel);
+
        IEnumerable<MovieViewModel> GetAllMovies();
 
         MovieViewModel GetMovieById(int id);
 
-        //MovieViewModel GetMovieByTitle(string title);
-
-
-        //MovieViewModel GetMovieByActor(string actor);
-
-        //MovieViewModel GetMovieByDirector(String director);
 
         IEnumerable<MovieViewModel> GetMovieByLanguage(string language);
 
-        //MovieViewModel GetMovieByGenre(string genre);
+     
         Task<string> AddMovieAsync(MovieViewModel movieViewModel);
 
         IEnumerable<MovieViewModel> GetMovieByDirector(string director);

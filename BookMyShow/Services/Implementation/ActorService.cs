@@ -74,8 +74,7 @@ namespace BookMyShow.Services.Implementation
                 return $"no Actor exists with this id {id}";
             }
 
-            //var editActor = _mapper.Map<Actor>(Actor);
-            //editActor.Id = id;
+
             Actorexists.Age = Actor.Age;
             Actorexists.Name = Actor.Name;
        
