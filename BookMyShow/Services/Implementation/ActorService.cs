@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace BookMyShow.Services.Implementation
 {
-    public class ActorService: IActorService
+    public class ActorService : IActorService
     {
         private readonly MovieContext _appmovieContext;
         private readonly IMapper _mapper;
@@ -23,12 +23,30 @@ namespace BookMyShow.Services.Implementation
 
         public async Task<string> AddActorAsync(ActorViewModel ActorViewModel)
         {
-            Actor Actormodel = _mapper.Map<Actor>(ActorViewModel);
+            try
+            {
 
-            _appmovieContext.Actors.Add(Actormodel);
-            await _appmovieContext.SaveChangesAsync();
+
+                if (ActorViewModel.Age.GetType() == typeof(int))
+                { 
+
+
+                    Actor Actormodel = _mapper.Map<Actor>(ActorViewModel);
+
+                    _appmovieContext.Actors.Add(Actormodel);
+                    await _appmovieContext.SaveChangesAsync();
+
+                    
+                
+
+                }
+
+            }
+            catch (Exception)
+            {
+                return "age is numeric";
+            }
             return "save successfully";
-
         }
 
         public IEnumerable<ActorViewModel> GetAllActors()
@@ -77,14 +95,13 @@ namespace BookMyShow.Services.Implementation
 
             Actorexists.Age = Actor.Age;
             Actorexists.Name = Actor.Name;
-       
+
 
             _appmovieContext.Actors.Update(Actorexists);
             await _appmovieContext.SaveChangesAsync();
 
             return "Update Successfully";
         }
-
 
     }
 }
