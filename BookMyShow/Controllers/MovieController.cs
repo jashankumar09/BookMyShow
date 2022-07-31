@@ -1,4 +1,6 @@
-﻿using BookMyShow.Models;
+﻿using AutoMapper;
+using BookMyShow.Dto;
+using BookMyShow.Models;
 using BookMyShow.Services.Interface;
 using BookMyShow.ViewModels;
 using Microsoft.AspNetCore.Http;
@@ -15,18 +17,21 @@ namespace BookMyShow.Controllers
     public class MovieController : ControllerBase
     {
 
+
         private readonly IMovieService _movieservice;
+        private readonly IMapper _mapper;
 
-
-        public MovieController(IMovieService movieservice)
+        public MovieController(IMovieService movieservice, IMapper mapper)
         {
             _movieservice = movieservice;
+            this._mapper = mapper;
         }
         [HttpPost("/AddMovie")]
         public async Task<string> AddMovieAsync(MovieViewModel movieviewmodel)
         {
-
-            string msg =await _movieservice.AddMovieAsync(movieviewmodel);
+            var moviemodel = _mapper.Map<MovieDto>(movieviewmodel);
+       
+            string msg =await _movieservice.AddMovieAsync(moviemodel);
             return msg;
 
         }
@@ -35,9 +40,18 @@ namespace BookMyShow.Controllers
 
         [HttpGet("/GetAllMovies")]
         public IEnumerable<MovieViewModel> GetAllMovies()
+
         {
+           
             var movies = _movieservice.GetAllMovies();
-            return movies;
+            var movie=_mapper.Map<IEnumerable<MovieViewModel>>(movies);
+
+            return movie;
+            //var moviemodel = _mapper.Map<IEnumerable<MovieDto>>(movies);
+
+           // return Ok(_mapper.Map<IEnumerable<MovieDto>>(movies));
+
+            
 
         }
 
@@ -45,27 +59,33 @@ namespace BookMyShow.Controllers
         public MovieViewModel GetMovieByIdAsync(int id)
         {
             var movie = _movieservice.GetMovieById(id);
-            return movie;
+
+            var mov = _mapper.Map<MovieViewModel>(movie);
+            
+            return mov;
         }
         [HttpPost("{language}/GetMovieByLanguage")]
         public IEnumerable<MovieViewModel> GetMovieByLanguage(string language)
         {
             var movie = _movieservice.GetMovieByLanguage(language);
-            return movie;
+            var mov = _mapper.Map<IEnumerable<MovieViewModel>>(movie);
+            return mov;
         }
 
         [HttpPost("{director}/GetMovieByDirector")]
         public IEnumerable<MovieViewModel> GetMovieByDirector(string director)
         {
             var movie = _movieservice.GetMovieByDirector(director);
-            return movie;
+            var mov = _mapper.Map<IEnumerable<MovieViewModel>>(movie);
+            return mov;
         }
 
         [HttpPost("{genre}/GetMovieByGenre")]
         public IEnumerable<MovieViewModel> GetMovieByGenre(string genre)
         {
             var movie = _movieservice.GetMovieByGenre(genre);
-            return movie;
+            var mov = _mapper.Map<IEnumerable<MovieViewModel>>(movie);
+            return mov;
         }
 
 
@@ -86,9 +106,10 @@ namespace BookMyShow.Controllers
 
 
         [HttpPut("{id}/UpdateMovie")]
-        public async Task<string>UpdateMovie(int id,MovieViewModel movie)
+        public async Task<string>UpdateMovie(int id,MovieDto movie)
         {
             var updatemovie = await _movieservice.UpdateMovieAsync(id,movie);
+
             return updatemovie;
         }
 

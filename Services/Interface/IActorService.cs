@@ -1,4 +1,5 @@
-﻿using BookMyShow.ViewModels;
+﻿using BookMyShow.Dto;
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,14 +10,14 @@ namespace BookMyShow.Services.Interface
     public interface IActorService
     {
 
-        Task<string> AddActorAsync(ActorViewModel ActorViewModel);
+        Task<string> AddActorAsync(ActorDto ActorDto);
 
         Task<string> DeleteActorAsync(int id);
 
 
-        Task<string> UpdateActorAsync(int id, ActorViewModel Actor);
-        IEnumerable<ActorViewModel> GetAllActors();
+        Task<string> UpdateActorAsync(int id, ActorDto Actor);
+        IEnumerable<ActorDto> GetAllActors();
 
-        ActorViewModel GetActorById(int id);
+        ActorDto GetActorById(int id);
     }
 }

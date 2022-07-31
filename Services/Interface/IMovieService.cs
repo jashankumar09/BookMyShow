@@ -1,4 +1,5 @@
-﻿using BookMyShow.Models;
+﻿using BookMyShow.Dto;
+using BookMyShow.Models;
 using BookMyShow.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -11,25 +12,25 @@ namespace BookMyShow.Services.Interface
     {
 
 
-       IEnumerable<MovieViewModel> GetAllMovies();
+       IEnumerable<MovieDto> GetAllMovies();
 
-        MovieViewModel GetMovieById(int id);
+        MovieDto GetMovieById(int id);
 
 
-        IEnumerable<MovieViewModel> GetMovieByLanguage(string language);
+        IEnumerable<MovieDto> GetMovieByLanguage(string language);
 
      
-        Task<string> AddMovieAsync(MovieViewModel movieViewModel);
+        Task<string> AddMovieAsync(MovieDto MovieDto);
 
-        IEnumerable<MovieViewModel> GetMovieByDirector(string director);
+        IEnumerable<MovieDto> GetMovieByDirector(string director);
 
-        IEnumerable<MovieViewModel> GetMovieByGenre(string genre);
+        IEnumerable<MovieDto> GetMovieByGenre(string genre);
 
 
         Task<string> DeleteMovieAsync(int id);
 
 
-        Task <string> UpdateMovieAsync(int id,MovieViewModel movie);
+        Task <string> UpdateMovieAsync(int id,MovieDto movie);
 
 
 

@@ -2,11 +2,11 @@
 using BookMyShow.Database;
 using BookMyShow.Models;
 using BookMyShow.Services.Interface;
-using BookMyShow.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using BookMyShow.Dto;
 
 namespace BookMyShow.Services.Implementation
 {
@@ -21,23 +21,20 @@ namespace BookMyShow.Services.Implementation
             this._mapper = mapper;
         }
 
-        public async Task<string> AddActorAsync(ActorViewModel ActorViewModel)
+        public async Task<string> AddActorAsync(ActorDto ActorDto)
         {
             try
             {
 
 
-                if (ActorViewModel.Age.GetType() == typeof(int))
+                if (ActorDto.Age.GetType() == typeof(int))
                 { 
 
 
-                    Actor Actormodel = _mapper.Map<Actor>(ActorViewModel);
+                    Actor Actormodel = _mapper.Map<Actor>(ActorDto);
 
                     _appmovieContext.Actors.Add(Actormodel);
                     await _appmovieContext.SaveChangesAsync();
-
-                    
-                
 
                 }
 
@@ -49,19 +46,19 @@ namespace BookMyShow.Services.Implementation
             return "save successfully";
         }
 
-        public IEnumerable<ActorViewModel> GetAllActors()
+        public IEnumerable<ActorDto> GetAllActors()
         {
 
             var Actors = _appmovieContext.Actors.ToList();
-            var listofActorViewmodel = _mapper.Map<IEnumerable<ActorViewModel>>(Actors);
-            return listofActorViewmodel;
+            var listofActorDto = _mapper.Map<IEnumerable<ActorDto>>(Actors);
+            return listofActorDto;
         }
 
-        public ActorViewModel GetActorById(int id)
+        public ActorDto GetActorById(int id)
         {
             var Actors = _appmovieContext.Actors.ToList();
             var Actor = Actors.Where(mov => mov.Id == id).FirstOrDefault();
-            var Actorbyid = _mapper.Map<ActorViewModel>(Actor);
+            var Actorbyid = _mapper.Map<ActorDto>(Actor);
             return Actorbyid;
 
         }
@@ -83,7 +80,7 @@ namespace BookMyShow.Services.Implementation
 
         }
 
-        public async Task<string> UpdateActorAsync(int id, ActorViewModel Actor)
+        public async Task<string> UpdateActorAsync(int id, ActorDto Actor)
         {
             var Actorexists = _appmovieContext.Actors.Where(mov => mov.Id == id).FirstOrDefault();
 

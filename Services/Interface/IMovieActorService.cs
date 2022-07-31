@@ -1,4 +1,4 @@
-﻿using BookMyShow.ViewModels;
+﻿using BookMyShow.Dto;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,8 +9,8 @@ namespace BookMyShow.Services.Interface
     public interface IMovieActorService
     {
     
-        Task<string> AddMovieActorAsync(MovieViewModel movie);
-       // MovieViewModel GetMovieById(long id);
+        Task<string> AddMovieActorAsync(MovieDto movie);
+       // MovieDto GetMovieById(long id);
 
     }
 }

@@ -1,4 +1,6 @@
-﻿using BookMyShow.Services.Interface;
+﻿using AutoMapper;
+using BookMyShow.Dto;
+using BookMyShow.Services.Interface;
 using BookMyShow.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -14,17 +16,19 @@ namespace BookMyShow.Controllers
     public class ActorController:ControllerBase
     {
         private readonly IActorService _actorservice;
+        private readonly IMapper _mapper;
 
 
-        public ActorController(IActorService actorservice)
+        public ActorController(IActorService actorservice, IMapper mapper)
         {
             _actorservice = actorservice;
+            this._mapper = mapper;
         }
         [HttpPost("/AddActor")]
         public async Task<string> AddActorAsync(ActorViewModel Actorviewmodel)
         {
-
-            string msg = await _actorservice.AddActorAsync(Actorviewmodel);
+            var actormodel = _mapper.Map<ActorDto>(Actorviewmodel);
+            string msg = await _actorservice.AddActorAsync(actormodel);
             return msg;
 
         }
@@ -35,7 +39,8 @@ namespace BookMyShow.Controllers
         public IEnumerable<ActorViewModel> GetAllActors()
         {
             var Actors = _actorservice.GetAllActors();
-            return Actors;
+            var actor = _mapper.Map<IEnumerable<ActorViewModel>>(Actors);
+            return actor;
 
         }
 
@@ -43,7 +48,9 @@ namespace BookMyShow.Controllers
         public ActorViewModel GetActorById(int id)
         {
             var Actor = _actorservice.GetActorById(id);
-            return Actor;
+            var act = _mapper.Map<ActorViewModel>(Actor);
+
+            return act;
         }
 
 
@@ -57,7 +64,7 @@ namespace BookMyShow.Controllers
 
 
         [HttpPut("{id}/UpdateActor")]
-        public async Task<string> UpdateActor(int id, ActorViewModel Actor)
+        public async Task<string> UpdateActor(int id, ActorDto Actor)
         {
             var updateActor = await _actorservice.UpdateActorAsync(id, Actor);
             return updateActor;

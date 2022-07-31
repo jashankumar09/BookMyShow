@@ -2,11 +2,11 @@
 using BookMyShow.Database;
 using BookMyShow.Models;
 using BookMyShow.Services.Interface;
-using BookMyShow.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using BookMyShow.Dto;
 
 namespace BookMyShow.Services.Implementation
 {
@@ -23,19 +23,19 @@ namespace BookMyShow.Services.Implementation
 
         }
 
-        //public string AddMovieActor(Movie_ActorViewModel movieactorViewModel)
+        //public string AddMovieActor(Movie_ActorDto movieactorDto)
         //{
         //    var movies = _appmovieContext.Movies.ToList();
-        //    var movie = movies.Where(mov => mov.Id ==movieactorViewModel.MovieId).FirstOrDefault();
+        //    var movie = movies.Where(mov => mov.Id ==movieactorDto.MovieId).FirstOrDefault();
         //    //var actors = _appmovieContext.Actors.ToList();
         //    //var actor=actors.Where(act =>act.Id==)
 
         //    return " ";
 
         //}
-        //public Movie_ActorViewModel GetActorWithMovies(long ActorId)
+        //public Movie_ActorDto GetActorWithMovies(long ActorId)
         //{
-        //    var actors = _appmovieContext.Actors.Where(n => n.Id ==ActorId).Select(n => new Movie_ActorViewModel()
+        //    var actors = _appmovieContext.Actors.Where(n => n.Id ==ActorId).Select(n => new Movie_ActorDto()
         //    {
         //        ActorIds = n.Movie_Actor.Select(n => n.ActorId).ToList()
         //    }).FirstOrDefault();
@@ -44,7 +44,7 @@ namespace BookMyShow.Services.Implementation
         //}
 
 
-        public async Task<string> AddMovieActorAsync(MovieViewModel movie)
+        public async Task<string> AddMovieActorAsync(MovieDto movie)
         {
             var _movie = new Movie()
             {

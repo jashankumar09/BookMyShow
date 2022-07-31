@@ -1,12 +1,12 @@
 ﻿using AutoMapper;
 using BookMyShow.Database;
 using BookMyShow.Models;
-using BookMyShow.ViewModels;
 using BookMyShow.Services.Interface;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using BookMyShow.Dto;
 
 namespace BookMyShow.Services.Implementation
 {
@@ -26,9 +26,9 @@ namespace BookMyShow.Services.Implementation
         }
      
 
-        public async Task<string> AddMovieAsync(MovieViewModel movieViewModel)
+        public async Task<string> AddMovieAsync(MovieDto movieDto)
         {
-            Movie moviemodel = _mapper.Map<Movie>(movieViewModel);
+            Movie moviemodel = _mapper.Map<Movie>(movieDto);
 
             _appmovieContext.Movies.Add(moviemodel);
             await _appmovieContext.SaveChangesAsync();
@@ -36,32 +36,32 @@ namespace BookMyShow.Services.Implementation
 
         }
 
-        public IEnumerable<MovieViewModel> GetAllMovies()
+        public IEnumerable<MovieDto> GetAllMovies()
         {
             
 
             var movies = _appmovieContext.Movies.ToList();
-            var listofMovieViewmodel = _mapper.Map<IEnumerable<MovieViewModel>>(movies);
-            return listofMovieViewmodel;
+            var listofMovieDto = _mapper.Map<IEnumerable<MovieDto>>(movies);
+            return listofMovieDto;
         }
 
 
 
-        public MovieViewModel GetMovieById(int id)
+        public MovieDto GetMovieById(int id)
         {
             var movies = _appmovieContext.Movies.ToList();
             var movie = movies.Where(mov => mov.Id == id).FirstOrDefault();
-            var moviebyid = _mapper.Map<MovieViewModel>(movie);
+            var moviebyid = _mapper.Map<MovieDto>(movie);
             return moviebyid;
 
         }
 
 
-        public IEnumerable<MovieViewModel> GetMovieByLanguage(string language)
+        public IEnumerable<MovieDto> GetMovieByLanguage(string language)
         {
             var movies = _appmovieContext.Movies.ToList();
             var Listmovie = movies.Where(mov => mov.MovieLanguage == language);
-            var moviesbylanguage = _mapper.Map<IEnumerable<MovieViewModel>>(Listmovie);
+            var moviesbylanguage = _mapper.Map<IEnumerable<MovieDto>>(Listmovie);
 
             return moviesbylanguage;
 
@@ -88,7 +88,7 @@ namespace BookMyShow.Services.Implementation
         }
 
 
-        public async Task<string> UpdateMovieAsync(int id,MovieViewModel movie)
+        public async Task<string> UpdateMovieAsync(int id,MovieDto movie)
         {
             var movieexists=_appmovieContext.Movies.Where(mov => mov.Id == id).FirstOrDefault();
 
@@ -109,21 +109,21 @@ namespace BookMyShow.Services.Implementation
             return "Update Successfully";
         }
 
-        public IEnumerable<MovieViewModel> GetMovieByDirector(string director)
+        public IEnumerable<MovieDto> GetMovieByDirector(string director)
         {
             var movies = _appmovieContext.Movies.ToList();
             var Listmovie = movies.Where(mov => mov.MovieDirector == director);
-            var moviesbydirector = _mapper.Map<IEnumerable<MovieViewModel>>(Listmovie);
+            var moviesbydirector = _mapper.Map<IEnumerable<MovieDto>>(Listmovie);
 
             return moviesbydirector;
 
         }
 
-        public IEnumerable<MovieViewModel> GetMovieByGenre(string genre)
+        public IEnumerable<MovieDto> GetMovieByGenre(string genre)
         {
             var movies = _appmovieContext.Movies.ToList();
             var Listmovie = movies.Where(mov => mov.MovieDirector == genre);
-            var moviesbygenre = _mapper.Map<IEnumerable<MovieViewModel>>(Listmovie);
+            var moviesbygenre = _mapper.Map<IEnumerable<MovieDto>>(Listmovie);
 
             return moviesbygenre;
         }
