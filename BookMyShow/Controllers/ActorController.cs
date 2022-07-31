@@ -64,9 +64,10 @@ namespace BookMyShow.Controllers
 
 
         [HttpPut("{id}/UpdateActor")]
-        public async Task<string> UpdateActor(int id, ActorDto Actor)
+        public async Task<string> UpdateActor(int id, ActorViewModel Actor)
         {
-            var updateActor = await _actorservice.UpdateActorAsync(id, Actor);
+            var act = _mapper.Map<ActorDto>(Actor);
+            var updateActor = await _actorservice.UpdateActorAsync(id, act);
             return updateActor;
         }
 

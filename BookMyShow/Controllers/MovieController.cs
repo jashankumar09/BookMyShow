@@ -106,9 +106,11 @@ namespace BookMyShow.Controllers
 
 
         [HttpPut("{id}/UpdateMovie")]
-        public async Task<string>UpdateMovie(int id,MovieDto movie)
+        public async Task<string>UpdateMovie(int id,MovieViewModel movie)
         {
-            var updatemovie = await _movieservice.UpdateMovieAsync(id,movie);
+            
+            var mov = _mapper.Map<MovieDto>(movie);
+            var updatemovie = await _movieservice.UpdateMovieAsync(id,mov);
 
             return updatemovie;
         }
