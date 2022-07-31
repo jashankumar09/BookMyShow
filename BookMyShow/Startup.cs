@@ -38,6 +38,7 @@ namespace BookMyShow
             services.AddScoped<IMovieService,MovieService>();
 
             services.AddScoped<IActorService,ActorService>();
+            services.AddScoped<IMovieActorService, MovieActorService>();
 
             //services.AddScoped<ICommaderRepo,MockCommanderRepo>();
 

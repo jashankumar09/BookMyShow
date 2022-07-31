@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace BookMyShow.Models
 {
-    public class Movie_Actor
+    public class MovieActor
     {
         public long Id { get; set; }
 
