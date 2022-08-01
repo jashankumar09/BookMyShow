@@ -41,7 +41,7 @@ namespace BookMyShow
             services.AddScoped<IMovieActorService, MovieActorService>();
           
 
-            //services.AddScoped<ICommaderRepo,MockCommanderRepo>();
+            
 
             services.AddSwaggerGen();
             services.AddSwaggerGen(c =>

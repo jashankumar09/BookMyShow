@@ -27,6 +27,6 @@ namespace BookMyShow.ViewModels
         public string MovieGenre { get; set; }
 
         public List<long> ActorIds { get; set; }
-       // public List<string> ActorNames { get; set; }
+       
     }
 }

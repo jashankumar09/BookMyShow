@@ -10,7 +10,7 @@ namespace BookMyShow.Services.Interface
     {
     
         Task<string> AddMovieActorAsync(MovieDto movie);
-       // MovieDto GetMovieById(long id);
+       
 
     }
 }

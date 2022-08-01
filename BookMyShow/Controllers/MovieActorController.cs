@@ -37,11 +37,6 @@ namespace BookMyShow.Controllers
 
         }
 
-        //[HttpGet("getactorwithmoviesbyid/{id}")]
-        //public async Task<MovieViewModel> GetMovieByIdAsync(long id)
-        //{
-        //    var response = await _movieactorservice.GetMovieById(id);
-        //    return response;
-        //}
+
     }
 }

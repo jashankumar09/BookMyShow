@@ -29,24 +29,28 @@ namespace BookMyShow.Services.Implementation
 
                 if (ActorDto.Age.GetType() == typeof(int))
                 {
-                    if (ActorDto.Age<100)
+                    if (ActorDto.Age < 100)
                     {
 
                         Actor Actormodel = _mapper.Map<Actor>(ActorDto);
 
                         _appmovieContext.Actors.Add(Actormodel);
                         await _appmovieContext.SaveChangesAsync();
-                        
+
                     }
 
                 }
 
             }
-            catch (Exception)
+
+            catch (Exception e)
             {
-                return "age is numeric";
+                Console.WriteLine("Please Enter valid age", e.Message);
             }
-            return "please enter valid age";
+
+            return "";
+         
+        
         }
 
         public IEnumerable<ActorDto> GetAllActors()
