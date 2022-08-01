@@ -2,6 +2,7 @@
 using BookMyShow.Dto;
 using BookMyShow.Models;
 using BookMyShow.ViewModels;
+using BookMyShow.ViewModels.Request;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,28 +14,28 @@ namespace BookMyShow.Mapper
     {
         public AppMapProfile()
         {
-            CreateMap<Movie, MovieViewModel>().ReverseMap();
+            CreateMap<Movie, MovieViewModel>();
             CreateMap<Actor, ActorViewModel>().ReverseMap();
             CreateMap<MovieActor, Movie_ActorViewModel>().ReverseMap();
 
-
-            CreateMap<Movie, MovieDto>();
-            CreateMap<MovieDto, Movie>()
-
-
-                .ForMember(dest => dest.Movie_Actor, act => act.Ignore())
-                ;
-
-            CreateMap<Actor, ActorDto>().ReverseMap();
-            CreateMap<MovieActor, Movie_ActorDto>().ReverseMap();
-
-            CreateMap<MovieViewModel, MovieDto>().ReverseMap();
-            CreateMap<ActorViewModel, ActorDto>().ReverseMap();
-            CreateMap<Movie_ActorViewModel, Movie_ActorDto>().ReverseMap();
+            CreateMap<MovieViewModel,Movie>().ForMember(dest => dest.Movie_Actor, act => act.Ignore());
+            //CreateMap<Movie, MovieDto>();
+            //CreateMap<MovieDto, Movie>()
 
 
+            //    .ForMember(dest => dest.Movie_Actor, act => act.Ignore())
+            //    ;
 
-            
+            //CreateMap<Actor, ActorDto>().ReverseMap();
+            //CreateMap<MovieActor, Movie_ActorDto>().ReverseMap();
+
+            //CreateMap<MovieViewModel, MovieDto>().ReverseMap();
+            //CreateMap<ActorViewModel, ActorDto>().ReverseMap();
+            //CreateMap<Movie_ActorViewModel, Movie_ActorDto>().ReverseMap();
+
+
+
+
         }
 
 

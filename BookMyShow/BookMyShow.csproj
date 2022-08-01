@@ -21,9 +21,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Models\Models.csproj" />
-    <ProjectReference Include="..\Services\Services.csproj" />
-    <ProjectReference Include="..\ViewModels\ViewModels.csproj" />
+    <ProjectReference Include="..\BookMyShow.Database\BookMyShow.Database.csproj" />
+    <ProjectReference Include="..\BookMyShow.Services\BookMyShow.Services.csproj" />
+    <ProjectReference Include="..\BookMyShow.ViewModels\BookMyShow.ViewModels.csproj" />
   </ItemGroup>
 
 

@@ -1,5 +1,5 @@
 ﻿
-using BookMyShow.Models
+using BookMyShow.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;

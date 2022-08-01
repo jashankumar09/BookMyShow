@@ -3,6 +3,7 @@ using BookMyShow.Dto;
 using BookMyShow.Models;
 using BookMyShow.Services.Interface;
 using BookMyShow.ViewModels;
+using BookMyShow.ViewModels.Request;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -29,9 +30,9 @@ namespace BookMyShow.Controllers
         [HttpPost("/AddMovie")]
         public async Task<string> AddMovieAsync(MovieViewModel movieviewmodel)
         {
-            var moviemodel = _mapper.Map<MovieDto>(movieviewmodel);
+           // var moviemodel = _mapper.Map<MovieDto>(movieviewmodel);
        
-            string msg =await _movieservice.AddMovieAsync(moviemodel);
+            string msg =await _movieservice.AddMovieAsync(movieviewmodel);
             return msg;
 
         }
@@ -109,8 +110,8 @@ namespace BookMyShow.Controllers
         public async Task<string>UpdateMovie(int id,MovieViewModel movie)
         {
             
-            var mov = _mapper.Map<MovieDto>(movie);
-            var updatemovie = await _movieservice.UpdateMovieAsync(id,mov);
+            //var mov = _mapper.Map<MovieDto>(movie);
+            var updatemovie = await _movieservice.UpdateMovieAsync(id,movie);
 
             return updatemovie;
         }
