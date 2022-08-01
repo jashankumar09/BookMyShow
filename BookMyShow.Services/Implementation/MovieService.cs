@@ -33,7 +33,7 @@ namespace BookMyShow.Services.Implementation
 
             _appmovieContext.Movies.Add(moviemodel);
             await _appmovieContext.SaveChangesAsync();
-            return "save successfully";
+            return "Save Successfully";
 
         }
 
