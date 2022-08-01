@@ -4,14 +4,16 @@ using BookMyShow.Database;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace BookMyShow.Migrations
 {
     [DbContext(typeof(MovieContext))]
-    partial class MovieContextModelSnapshot : ModelSnapshot
+    [Migration("20220801172953_initial04")]
+    partial class initial04
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -29,9 +31,16 @@ namespace BookMyShow.Migrations
                     b.Property<int>("Age")
                         .HasColumnType("int");
 
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<long>("PhoneNo")
+                        .HasColumnType("bigint");
 
                     b.HasKey("Id");
 
@@ -70,6 +79,28 @@ namespace BookMyShow.Migrations
                     b.ToTable("Movies");
                 });
 
+            modelBuilder.Entity("BookMyShow.Models.MovieActor", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<long>("ActorId")
+                        .HasColumnType("bigint");
+
+                    b.Property<long>("MovieId")
+                        .HasColumnType("bigint");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ActorId");
+
+                    b.HasIndex("MovieId");
+
+                    b.ToTable("Movie_Actor");
+                });
+
             modelBuilder.Entity("BookMyShow.Models.MovieBooking", b =>
                 {
                     b.Property<int>("Id")
@@ -92,28 +123,6 @@ namespace BookMyShow.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("MovieBookings");
-                });
-
-            modelBuilder.Entity("BookMyShow.Models.Movie_Actor", b =>
-                {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<long>("ActorId")
-                        .HasColumnType("bigint");
-
-                    b.Property<long>("MovieId")
-                        .HasColumnType("bigint");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ActorId");
-
-                    b.HasIndex("MovieId");
-
-                    b.ToTable("Movie_Actor");
                 });
 
             modelBuilder.Entity("BookMyShow.Models.Seat", b =>
@@ -170,7 +179,7 @@ namespace BookMyShow.Migrations
                     b.ToTable("Theatres");
                 });
 
-            modelBuilder.Entity("BookMyShow.Models.Movie_Actor", b =>
+            modelBuilder.Entity("BookMyShow.Models.MovieActor", b =>
                 {
                     b.HasOne("BookMyShow.Models.Actor", "Actor")
                         .WithMany("Movie_Actor")

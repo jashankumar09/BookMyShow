@@ -18,6 +18,15 @@ namespace BookMyShow.Models
         [Required]
         public int Age { get; set; }
 
+        [Required]
+        [EmailAddress]
+        [RegularExpression(@"[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}", ErrorMessage = "Incorrect Email Format")]
+        public string Email { get; set; }
+
+        [Required]
+        public long PhoneNo { get; set; }
+
+
         public List<MovieActor> Movie_Actor { get; set; }
 
     }
