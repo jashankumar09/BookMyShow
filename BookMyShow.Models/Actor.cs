@@ -12,10 +12,14 @@ namespace BookMyShow.Models
         [Required]
         public long Id { get; set; }
 
+        
         [Required]
+        [RegularExpression(@"[a-zA-Z]([a-z A-Z]){2,60}", ErrorMessage = "Only Alphabets are allowed & Name must be of minimum 3-characters.")]
+
         public string Name { get; set; }
 
         [Required]
+        [Range(0, 100, ErrorMessage = "Age must be between 0-100 in years.")]
         public int Age { get; set; }
 
         [Required]
@@ -24,6 +28,8 @@ namespace BookMyShow.Models
         public string Email { get; set; }
 
         [Required]
+        [RegularExpression(@"^(\d{10})$", ErrorMessage = "Wrong mobile no")]
+
         public long PhoneNo { get; set; }
 
 

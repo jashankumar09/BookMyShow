@@ -19,6 +19,6 @@ namespace BookMyShow.Services.Interface
         Task<string> UpdateActorAsync(int id, ActorViewModel Actor);
         IEnumerable<ActorViewModel> GetAllActors();
 
-        ActorViewModel GetActorById(int id);
+        IEnumerable<ActorViewModel> GetActorByName(string name);
     }
 }

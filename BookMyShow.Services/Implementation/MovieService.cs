@@ -60,8 +60,9 @@ namespace BookMyShow.Services.Implementation
 
         public IEnumerable<MovieViewModel> GetMovieByLanguage(string language)
         {
+            
             var movies = _appmovieContext.Movies.ToList();
-            var Listmovie = movies.Where(mov => mov.MovieLanguage == language);
+            var Listmovie = movies.Where(mov => mov.MovieLanguage.ToUpper() == language.ToUpper());
             var moviesbylanguage = _mapper.Map<IEnumerable<MovieViewModel>>(Listmovie);
 
             return moviesbylanguage;
@@ -113,7 +114,7 @@ namespace BookMyShow.Services.Implementation
         public IEnumerable<MovieViewModel> GetMovieByDirector(string director)
         {
             var movies = _appmovieContext.Movies.ToList();
-            var Listmovie = movies.Where(mov => mov.MovieDirector == director);
+            var Listmovie = movies.Where(mov => mov.MovieDirector.ToUpper() == director.ToUpper());
             var moviesbydirector = _mapper.Map<IEnumerable<MovieViewModel>>(Listmovie);
 
             return moviesbydirector;
@@ -123,7 +124,7 @@ namespace BookMyShow.Services.Implementation
         public IEnumerable<MovieViewModel> GetMovieByGenre(string genre)
         {
             var movies = _appmovieContext.Movies.ToList();
-            var Listmovie = movies.Where(mov => mov.MovieDirector == genre);
+            var Listmovie = movies.Where(mov => mov.MovieGenre.ToUpper() == genre.ToUpper());
             var moviesbygenre = _mapper.Map<IEnumerable<MovieViewModel>>(Listmovie);
 
             return moviesbygenre;

@@ -24,34 +24,10 @@ namespace BookMyShow.Services.Implementation
 
         public async Task<string> AddActorAsync(ActorViewModel ActorViewModel)
         {
-            try
-            {
-
-
-                if (ActorViewModel.Age.GetType() == typeof(int))
-                {
-                    if (ActorViewModel.Age < 100)
-                    {
-
-                        Actor Actormodel = _mapper.Map<Actor>(ActorViewModel);
-
-                        _appmovieContext.Actors.Add(Actormodel);
-                        await _appmovieContext.SaveChangesAsync();
-
-                    }
-
-                }
-
-            }
-
-            catch (Exception e)
-            {
-                Console.WriteLine("Please Enter valid age", e.Message);
-            }
-
-            return "";
-         
-        
+            Actor Actormodel = _mapper.Map<Actor>(ActorViewModel);
+            _appmovieContext.Actors.Add(Actormodel);
+            await _appmovieContext.SaveChangesAsync();
+            return "Save Successfully";
         }
 
         public IEnumerable<ActorViewModel> GetAllActors()
@@ -62,12 +38,12 @@ namespace BookMyShow.Services.Implementation
             return listofActorViewModel;
         }
 
-        public ActorViewModel GetActorById(int id)
+        public IEnumerable<ActorViewModel> GetActorByName(string name)
         {
-            var Actors = _appmovieContext.Actors.ToList();
-            var Actor = Actors.Where(mov => mov.Id == id).FirstOrDefault();
-            var Actorbyid = _mapper.Map<ActorViewModel>(Actor);
-            return Actorbyid;
+            var actors = _appmovieContext.Actors.ToList();
+            var filteredActor = actors.Where(mov => mov.Name.ToUpper() ==name?.ToUpper());
+            var actorbyname = _mapper.Map<IEnumerable<ActorViewModel>>(filteredActor);
+            return actorbyname;
 
         }
 
@@ -100,6 +76,9 @@ namespace BookMyShow.Services.Implementation
 
             Actorexists.Age = Actor.Age;
             Actorexists.Name = Actor.Name;
+            Actorexists.Email = Actor.Email;
+            Actorexists.PhoneNo = Actor.PhoneNo;
+            
 
 
             _appmovieContext.Actors.Update(Actorexists);

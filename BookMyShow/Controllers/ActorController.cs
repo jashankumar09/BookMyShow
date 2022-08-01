@@ -44,12 +44,11 @@ namespace BookMyShow.Controllers
             return actor;
 
         }
-
-        [HttpPost("{id}")]
-        public ActorViewModel GetActorById(int id)
+        [HttpGet("{name}/GetActorByName")]
+        public IEnumerable<ActorViewModel> GetActorByName(string name)
         {
-            var Actor = _actorservice.GetActorById(id);
-            var act = _mapper.Map<ActorViewModel>(Actor);
+            var Actor = _actorservice.GetActorByName(name);
+            var act = _mapper.Map<IEnumerable<ActorViewModel>>(Actor);
 
             return act;
         }
