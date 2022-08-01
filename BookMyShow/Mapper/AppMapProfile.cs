@@ -13,13 +13,20 @@ namespace BookMyShow.Mapper
     {
         public AppMapProfile()
         {
-          CreateMap<Movie,MovieViewModel>().ReverseMap();
-          CreateMap<Actor,ActorViewModel>().ReverseMap();
+            CreateMap<Movie, MovieViewModel>().ReverseMap();
+            CreateMap<Actor, ActorViewModel>().ReverseMap();
+            CreateMap<MovieActor, Movie_ActorViewModel>().ReverseMap();
 
 
-           CreateMap<Movie,MovieDto>().ReverseMap();
-           CreateMap<Actor,ActorDto>().ReverseMap();
-           CreateMap<MovieActor, Movie_ActorDto>().ReverseMap();
+            CreateMap<Movie, MovieDto>();
+            CreateMap<MovieDto, Movie>()
+
+
+                .ForMember(dest => dest.Movie_Actor, act => act.Ignore())
+                ;
+
+            CreateMap<Actor, ActorDto>().ReverseMap();
+            CreateMap<MovieActor, Movie_ActorDto>().ReverseMap();
 
             CreateMap<MovieViewModel, MovieDto>().ReverseMap();
             CreateMap<ActorViewModel, ActorDto>().ReverseMap();
@@ -27,7 +34,7 @@ namespace BookMyShow.Mapper
 
 
 
-
+            
         }
 
 
