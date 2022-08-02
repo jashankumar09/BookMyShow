@@ -27,15 +27,15 @@ namespace BookMyShow.Controllers
             _movieservice = movieservice;
             this._mapper = mapper;
         }
-        [HttpPost("/AddMovie")]
-        public async Task<string> AddMovieAsync(MovieViewModel movieviewmodel)
-        {
-           // var moviemodel = _mapper.Map<MovieDto>(movieviewmodel);
+        //[HttpPost("/AddMovie")]
+        //public async Task<string> AddMovieAsync(MovieViewModel movieviewmodel)
+        //{
+        //   // var moviemodel = _mapper.Map<MovieDto>(movieviewmodel);
        
-            string msg =await _movieservice.AddMovieAsync(movieviewmodel);
-            return msg;
+        //    string msg =await _movieservice.AddMovieAsync(movieviewmodel);
+        //    return msg;
 
-        }
+        //}
         
         
 
@@ -56,7 +56,7 @@ namespace BookMyShow.Controllers
 
         }
 
-        [HttpPost("{id}")]
+        [HttpGet("{id}")]
         public MovieViewModel GetMovieByIdAsync(int id)
         {
             var movie = _movieservice.GetMovieById(id);
