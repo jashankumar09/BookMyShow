@@ -4,6 +4,7 @@ using BookMyShow.Models;
 using BookMyShow.Services.Interface;
 using BookMyShow.ViewModels;
 using BookMyShow.ViewModels.Request;
+using BookMyShow.ViewModels.Response;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -98,22 +99,22 @@ namespace BookMyShow.Controllers
 
 
         [HttpDelete("{id}/DeleteMovie")]
-        public async Task<string> DeleteMovie(int id)
+        public async Task<ResponseViewModel> DeleteMovie(int id)
         {
             var deletemovie=await _movieservice.DeleteMovieAsync(id);
-            return deletemovie;
+            return new ResponseViewModel { Message = deletemovie };
 
         }
 
 
         [HttpPut("{id}/UpdateMovie")]
-        public async Task<string>UpdateMovie(int id,MovieViewModel movie)
+        public async Task<ResponseViewModel> UpdateMovie(int id,MovieViewModel movie)
         {
             
             //var mov = _mapper.Map<MovieDto>(movie);
             var updatemovie = await _movieservice.UpdateMovieAsync(id,movie);
 
-            return updatemovie;
+            return new ResponseViewModel { Message = updatemovie };
         }
 
 

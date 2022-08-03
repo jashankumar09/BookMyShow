@@ -3,6 +3,7 @@ using BookMyShow.Dto;
 using BookMyShow.Services.Interface;
 using BookMyShow.ViewModels;
 using BookMyShow.ViewModels.Request;
+using BookMyShow.ViewModels.Response;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -26,11 +27,11 @@ namespace BookMyShow.Controllers
             this._mapper = mapper;
         }
         [HttpPost("/AddActor")]
-        public async Task<string> AddActorAsync(ActorViewModel Actorviewmodel)
+        public async Task<ResponseViewModel> AddActorAsync(ActorViewModel Actorviewmodel)
         {
            // var actormodel = _mapper.Map<ActorDto>(Actorviewmodel);
             string msg = await _actorservice.AddActorAsync(Actorviewmodel);
-            return msg;
+            return new ResponseViewModel {Message=msg };
 
         }
 
@@ -55,20 +56,20 @@ namespace BookMyShow.Controllers
 
 
         [HttpDelete("{id}/DeleteActor")]
-        public async Task<string> DeleteActor(int id)
+        public async Task<ResponseViewModel> DeleteActor(int id)
         {
             var deleteActor = await _actorservice.DeleteActorAsync(id);
-            return deleteActor;
+            return new ResponseViewModel { Message = deleteActor };
 
         }
 
 
         [HttpPut("{id}/UpdateActor")]
-        public async Task<string> UpdateActor(int id, ActorViewModel Actor)
+        public async Task<ResponseViewModel> UpdateActor(int id, ActorViewModel Actor)
         {
            // var act = _mapper.Map<ActorDto>(Actor);
             var updateActor = await _actorservice.UpdateActorAsync(id, Actor);
-            return updateActor;
+            return new ResponseViewModel { Message = updateActor };
         }
 
 

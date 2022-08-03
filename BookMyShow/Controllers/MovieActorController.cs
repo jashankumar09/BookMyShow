@@ -4,6 +4,7 @@ using BookMyShow.Services.Implementation;
 using BookMyShow.Services.Interface;
 using BookMyShow.ViewModels;
 using BookMyShow.ViewModels.Request;
+using BookMyShow.ViewModels.Response;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -29,12 +30,13 @@ namespace BookMyShow.Controllers
             this._mapper = mapper;
         }
         [HttpPost("/AddMovieActor")]
-        public async Task<string> AddMovieActorAsync(MovieViewModel movieviewmodel)
+        public async Task<ResponseViewModel> AddMovieActorAsync(MovieViewModel movieviewmodel)
         {
           //  var moviemodel = _mapper.Map<MovieDto>(movieviewmodel);
 
             string msg = await _movieactorservice.AddMovieActorAsync(movieviewmodel);
-            return msg;
+            
+            return new ResponseViewModel { Message = msg };
 
         }
 
