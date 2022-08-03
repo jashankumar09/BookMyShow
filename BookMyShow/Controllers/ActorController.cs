@@ -30,8 +30,8 @@ namespace BookMyShow.Controllers
         public async Task<ResponseViewModel> AddActorAsync(ActorViewModel Actorviewmodel)
         {
            // var actormodel = _mapper.Map<ActorDto>(Actorviewmodel);
-            string msg = await _actorservice.AddActorAsync(Actorviewmodel);
-            return new ResponseViewModel {Message=msg };
+            var addactor = await _actorservice.AddActorAsync(Actorviewmodel);
+            return addactor;
 
         }
 
@@ -59,7 +59,7 @@ namespace BookMyShow.Controllers
         public async Task<ResponseViewModel> DeleteActor(int id)
         {
             var deleteActor = await _actorservice.DeleteActorAsync(id);
-            return new ResponseViewModel { Message = deleteActor };
+            return deleteActor;
 
         }
 
@@ -69,7 +69,7 @@ namespace BookMyShow.Controllers
         {
            // var act = _mapper.Map<ActorDto>(Actor);
             var updateActor = await _actorservice.UpdateActorAsync(id, Actor);
-            return new ResponseViewModel { Message = updateActor };
+            return updateActor;
         }
 
 

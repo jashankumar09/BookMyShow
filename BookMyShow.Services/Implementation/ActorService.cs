@@ -8,6 +8,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using BookMyShow.Dto;
 using BookMyShow.ViewModels.Request;
+using BookMyShow.ViewModels.Response;
 
 namespace BookMyShow.Services.Implementation
 {
@@ -22,12 +23,23 @@ namespace BookMyShow.Services.Implementation
             this._mapper = mapper;
         }
 
-        public async Task<string> AddActorAsync(ActorViewModel ActorViewModel)
+        public async Task<ResponseViewModel> AddActorAsync(ActorViewModel ActorViewModel)
         {
-            Actor Actormodel = _mapper.Map<Actor>(ActorViewModel);
-            _appmovieContext.Actors.Add(Actormodel);
-            await _appmovieContext.SaveChangesAsync();
-            return "Save Successfully";
+            try
+            {
+
+                Actor Actormodel = _mapper.Map<Actor>(ActorViewModel);
+                _appmovieContext.Actors.Add(Actormodel);
+                await _appmovieContext.SaveChangesAsync();
+                return new ResponseViewModel { Message = "Add successfully" };
+            }
+            catch
+            {
+                List<string> error = new List<string>();
+                error.Add("you didnot add anything");
+               
+                return new ResponseViewModel { Error = error };
+            }
         }
 
         public IEnumerable<ActorViewModel> GetAllActors()
@@ -47,31 +59,40 @@ namespace BookMyShow.Services.Implementation
 
         }
 
-        public async Task<string> DeleteActorAsync(int id)
+        public async Task<ResponseViewModel> DeleteActorAsync(int id)
         {
             var Actors = _appmovieContext.Actors;
             var Actor = Actors.Where(mov => mov.Id == id).FirstOrDefault();
 
             if (Actor == null)
             {
-                return $"no Actor found for this id {id}";
+                List<string> error = new List<string>();
+                error.Add("no Actor exists with this id");
+
+                return new ResponseViewModel { Error = error };
             }
             _appmovieContext.Remove(Actor);
 
             await _appmovieContext.SaveChangesAsync();
 
-            return "Delete Successfully";
+            return new ResponseViewModel { Message = "Delete Successfully" };
 
         }
 
-        public async Task<string> UpdateActorAsync(int id, ActorViewModel Actor)
+        public async Task<ResponseViewModel> UpdateActorAsync(int id, ActorViewModel Actor)
         {
             var Actorexists = _appmovieContext.Actors.Where(mov => mov.Id == id).FirstOrDefault();
 
+            
+
             if (Actorexists == null)
             {
-                return $"no Actor exists with this id {id}";
+                List<string> error = new List<string>();
+                error.Add("no Actor exists with this id");
+
+                return new ResponseViewModel { Error = error };
             }
+          
 
 
             Actorexists.Age = Actor.Age;
@@ -84,7 +105,8 @@ namespace BookMyShow.Services.Implementation
             _appmovieContext.Actors.Update(Actorexists);
             await _appmovieContext.SaveChangesAsync();
 
-            return "Update Successfully";
+            //message.Add("Update Successfully");
+            return new ResponseViewModel { Message = "update successfully"};
         }
 
     }

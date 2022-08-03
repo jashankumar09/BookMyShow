@@ -2,6 +2,7 @@
 using BookMyShow.Models;
 using BookMyShow.ViewModels;
 using BookMyShow.ViewModels.Request;
+using BookMyShow.ViewModels.Response;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,17 +22,17 @@ namespace BookMyShow.Services.Interface
         IEnumerable<MovieViewModel> GetMovieByLanguage(string language);
 
      
-        Task<string> AddMovieAsync(MovieViewModel MovieViewModel);
+        Task<ResponseViewModel> AddMovieAsync(MovieViewModel MovieViewModel);
 
         IEnumerable<MovieViewModel> GetMovieByDirector(string director);
 
         IEnumerable<MovieViewModel> GetMovieByGenre(string genre);
 
 
-        Task<string> DeleteMovieAsync(int id);
+        Task<ResponseViewModel> DeleteMovieAsync(int id);
 
 
-        Task <string> UpdateMovieAsync(int id,MovieViewModel movie);
+        Task <ResponseViewModel> UpdateMovieAsync(int id,MovieViewModel movie);
 
 
 

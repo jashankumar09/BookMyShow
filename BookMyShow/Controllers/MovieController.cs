@@ -102,7 +102,7 @@ namespace BookMyShow.Controllers
         public async Task<ResponseViewModel> DeleteMovie(int id)
         {
             var deletemovie=await _movieservice.DeleteMovieAsync(id);
-            return new ResponseViewModel { Message = deletemovie };
+            return deletemovie;
 
         }
 
@@ -112,9 +112,15 @@ namespace BookMyShow.Controllers
         {
             
             //var mov = _mapper.Map<MovieDto>(movie);
+
             var updatemovie = await _movieservice.UpdateMovieAsync(id,movie);
 
-            return new ResponseViewModel { Message = updatemovie };
+            return updatemovie;
+            
+
+
+
+
         }
 
 

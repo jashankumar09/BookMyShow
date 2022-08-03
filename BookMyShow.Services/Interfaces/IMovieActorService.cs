@@ -1,5 +1,6 @@
 ﻿
 using BookMyShow.ViewModels.Request;
+using BookMyShow.ViewModels.Response;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +11,7 @@ namespace BookMyShow.Services.Interface
     public interface IMovieActorService
     {
     
-        Task<string> AddMovieActorAsync(MovieViewModel movie);
+        Task<ResponseViewModel> AddMovieActorAsync(MovieViewModel movie);
        
 
     }

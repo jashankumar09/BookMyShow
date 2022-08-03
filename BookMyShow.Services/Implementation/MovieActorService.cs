@@ -8,6 +8,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using BookMyShow.Dto;
 using BookMyShow.ViewModels.Request;
+using BookMyShow.ViewModels.Response;
 
 namespace BookMyShow.Services.Implementation
 {
@@ -27,33 +28,42 @@ namespace BookMyShow.Services.Implementation
 
 
 
-        public async Task<string> AddMovieActorAsync(MovieViewModel movie)
+        public async Task<ResponseViewModel> AddMovieActorAsync(MovieViewModel movie)
         {
-            var _movie = new Movie()
+            try
             {
-                MovieTitle = movie.MovieTitle,
-                MovieActor = movie.MovieActor,
-                MovieDirector = movie.MovieDirector,
-                MovieLanguage = movie.MovieLanguage,
-                MovieGenre=movie.MovieGenre
-
-            };
-            _appmovieContext.Movies.Add(_movie);
-           await _appmovieContext.SaveChangesAsync();
-
-            foreach (var id in movie.ActorIds)
-            {
-                var _movie_actor = new MovieActor()
+                var _movie = new Movie()
                 {
-                    MovieId = _movie.Id,
-                    ActorId = id
-                };
-                _appmovieContext.Movie_Actor.Add(_movie_actor);
+                    MovieTitle = movie.MovieTitle,
+                    MovieActor = movie.MovieActor,
+                    MovieDirector = movie.MovieDirector,
+                    MovieLanguage = movie.MovieLanguage,
+                    MovieGenre = movie.MovieGenre
 
-                
+                };
+                _appmovieContext.Movies.Add(_movie);
+                await _appmovieContext.SaveChangesAsync();
+
+                foreach (var id in movie.ActorIds)
+                {
+                    var _movie_actor = new MovieActor()
+                    {
+                        MovieId = _movie.Id,
+                        ActorId = id
+                    };
+                    _appmovieContext.Movie_Actor.Add(_movie_actor);
+
+
+                }
+                await _appmovieContext.SaveChangesAsync();
+                return new ResponseViewModel { Message = "Movie Added Successfully" };
             }
-           await _appmovieContext.SaveChangesAsync();
-            return "Added Successfully";
+            catch
+            {
+                List<string> error = new List<string>();
+                error.Add("please add movie");
+                return new ResponseViewModel { Error = error };
+            }
         }
 
 

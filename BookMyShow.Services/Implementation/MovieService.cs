@@ -8,6 +8,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using BookMyShow.Dto;
 using BookMyShow.ViewModels.Request;
+using BookMyShow.ViewModels.Response;
 
 namespace BookMyShow.Services.Implementation
 {
@@ -27,14 +28,25 @@ namespace BookMyShow.Services.Implementation
         }
      
 
-        public async Task<string> AddMovieAsync(MovieViewModel movieViewModel)
+        public async Task<ResponseViewModel> AddMovieAsync(MovieViewModel movieViewModel)
         {
             Movie moviemodel = _mapper.Map<Movie>(movieViewModel);
 
-            _appmovieContext.Movies.Add(moviemodel);
-            await _appmovieContext.SaveChangesAsync();
-            return "Save Successfully";
+            try
+            {
 
+
+                _appmovieContext.Movies.Add(moviemodel);
+                await _appmovieContext.SaveChangesAsync();
+                return new ResponseViewModel { Message = "Movie Added Successfully" };
+
+            }
+            catch
+            {
+                List<string> error = new List<string>();
+                return new ResponseViewModel { Error = error };
+
+            }
         }
 
         public IEnumerable<MovieViewModel> GetAllMovies()
@@ -72,31 +84,39 @@ namespace BookMyShow.Services.Implementation
         
 
 
-        public async Task<string> DeleteMovieAsync(int id)
+        public async Task<ResponseViewModel> DeleteMovieAsync(int id)
         {
             var movies = _appmovieContext.Movies;
             var movie = movies.Where(mov => mov.Id == id).FirstOrDefault();
 
             if (movie == null)
             {
-                return $"no movie found for this id {id}";
+                List<string> error = new List<string>();
+                error.Add("no Movie exists with this id");
+
+                return new ResponseViewModel { Error = error };
+
             }
             _appmovieContext.Remove(movie);
 
             await _appmovieContext.SaveChangesAsync();
 
-            return "Delete Successfully";
+            return new ResponseViewModel { Message = "Delete Successfully" };
 
         }
 
 
-        public async Task<string> UpdateMovieAsync(int id,MovieViewModel movie)
+        public async Task<ResponseViewModel> UpdateMovieAsync(int id,MovieViewModel movie)
         {
             var movieexists=_appmovieContext.Movies.Where(mov => mov.Id == id).FirstOrDefault();
 
             if (movieexists == null) 
             {
-                return $"no movie exists with this id {id}";
+                List<string> error = new List<string>();
+                error.Add("no Actor exists with this id");
+
+                return new ResponseViewModel { Error = error };
+
             }
 
             movieexists.MovieActor = movie.MovieActor;
@@ -108,7 +128,7 @@ namespace BookMyShow.Services.Implementation
             _appmovieContext.Movies.Update(movieexists);
             await _appmovieContext.SaveChangesAsync();
 
-            return "Update Successfully";
+            return new ResponseViewModel { Message = "update successfully" };
         }
 
         public IEnumerable<MovieViewModel> GetMovieByDirector(string director)

@@ -34,9 +34,9 @@ namespace BookMyShow.Controllers
         {
           //  var moviemodel = _mapper.Map<MovieDto>(movieviewmodel);
 
-            string msg = await _movieactorservice.AddMovieActorAsync(movieviewmodel);
-            
-            return new ResponseViewModel { Message = msg };
+            var msg = await _movieactorservice.AddMovieActorAsync(movieviewmodel);
+
+            return msg;
 
         }
 

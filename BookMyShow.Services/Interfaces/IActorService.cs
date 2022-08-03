@@ -1,6 +1,7 @@
 ﻿
 
 using BookMyShow.ViewModels.Request;
+using BookMyShow.ViewModels.Response;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,12 +12,12 @@ namespace BookMyShow.Services.Interface
     public interface IActorService
     {
 
-        Task<string> AddActorAsync(ActorViewModel ActorViewModel);
+        Task<ResponseViewModel> AddActorAsync(ActorViewModel ActorViewModel);
 
-        Task<string> DeleteActorAsync(int id);
+        Task<ResponseViewModel> DeleteActorAsync(int id);
 
 
-        Task<string> UpdateActorAsync(int id, ActorViewModel Actor);
+        Task<ResponseViewModel> UpdateActorAsync(int id, ActorViewModel Actor);
         IEnumerable<ActorViewModel> GetAllActors();
 
         IEnumerable<ActorViewModel> GetActorByName(string name);
