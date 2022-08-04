@@ -33,11 +33,10 @@ namespace BookMyShow.Services.Implementation
                 await _appmovieContext.SaveChangesAsync();
                 return new ResponseViewModel { Message = "Add successfully" };
             }
-            catch
+            catch(Exception e)
             {
                 List<string> error = new List<string>();
-                error.Add("you didnot add anything");
-               
+                error.Add(e.Message);
                 return new ResponseViewModel { Error = error };
             }
         }
@@ -69,7 +68,7 @@ namespace BookMyShow.Services.Implementation
                 List<string> error = new List<string>();
                 error.Add("no Actor exists with this id");
 
-                return new ResponseViewModel { Error = error };
+                return new ResponseViewModel { Error= error};
             }
             _appmovieContext.Remove(Actor);
 
@@ -90,7 +89,10 @@ namespace BookMyShow.Services.Implementation
                 List<string> error = new List<string>();
                 error.Add("no Actor exists with this id");
 
-                return new ResponseViewModel { Error = error };
+
+      
+
+                return new ResponseViewModel { Error = error};
             }
           
 

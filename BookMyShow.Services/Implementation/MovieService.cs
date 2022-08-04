@@ -41,9 +41,11 @@ namespace BookMyShow.Services.Implementation
                 return new ResponseViewModel { Message = "Movie Added Successfully" };
 
             }
-            catch
+            catch(Exception e)
             {
                 List<string> error = new List<string>();
+
+                error.Add(e.Message);
                 return new ResponseViewModel { Error = error };
 
             }
