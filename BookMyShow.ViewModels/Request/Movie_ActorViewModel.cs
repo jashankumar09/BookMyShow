@@ -11,7 +11,7 @@ namespace BookMyShow.ViewModels.Request
 
         public long MovieId { get; set; }
 
-        //public Movie Movie { get; set; }
+    
 
 
 

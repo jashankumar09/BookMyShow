@@ -107,7 +107,7 @@ namespace BookMyShow.Services.Implementation
             _appmovieContext.Actors.Update(Actorexists);
             await _appmovieContext.SaveChangesAsync();
 
-            //message.Add("Update Successfully");
+            
             return new ResponseViewModel { Message = "update successfully"};
         }
 
